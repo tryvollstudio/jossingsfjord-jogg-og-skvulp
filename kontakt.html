@@ -6,6 +6,8 @@
   <title>Kontakt – Jøssingfjord Jogg og Skvulp</title>
   <meta name="description" content="Ta kontakt med Jøssingfjord Jogg og Skvulp.">
   <link rel="stylesheet" href="css/style.css">
+  <!-- Leaflet.js for kart -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 </head>
 <body>
 
@@ -23,19 +25,60 @@
   </div>
 </nav>
 
-<section class="hero" style="padding: 3.5rem 1.5rem 3rem;">
-  <h1>Kontakt oss</h1>
-  <p>Lurer du på noe, eller vil du bli med i klubben? Send oss en e-post.</p>
+<section class="hero" style="padding: 3.5rem 1.5rem 4rem;">
+  <div class="hero-content">
+    <div class="hero-badge">Ta kontakt</div>
+    <h1>Kontakt oss</h1>
+    <p>Lurer du på noe, eller vil du bli med i klubben? Vi hører gjerne fra deg.</p>
+  </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z" fill="#f7f9fc"/>
+    </svg>
+  </div>
 </section>
 
 <section class="section">
   <div class="container">
-    <div class="contact-simple">
-      <div style="font-size:2.5rem;margin-bottom:1rem;">✉️</div>
-      <h3>Send oss en e-post</h3>
-      <p>Vi er en liten klubb under oppstart, og svarer så raskt vi kan.</p>
-      <a href="mailto:jacobhagemann@outlook.no" class="contact-email-link">jacobhagemann@outlook.no</a>
+
+    <div class="section-header reveal">
+      <span class="section-label">Styret</span>
+      <h2>Hvem kan du nå?</h2>
     </div>
+
+    <div class="contact-grid">
+
+      <div class="contact-card reveal reveal-delay-1">
+        <div class="contact-avatar">👔</div>
+        <h3>Jacob Hagemann</h3>
+        <div class="contact-role">Daglig leder</div>
+        <a href="mailto:jacobhagemann@outlook.no">jacobhagemann@outlook.no</a>
+      </div>
+
+      <div class="contact-card reveal reveal-delay-2">
+        <div class="contact-avatar">🏊</div>
+        <h3>Vetle Sørdal</h3>
+        <div class="contact-role">Svømmetrener</div>
+        <a href="mailto:vetle.sordal@gmail.com">vetle.sordal@gmail.com</a>
+      </div>
+
+      <div class="contact-card reveal reveal-delay-3">
+        <div class="contact-avatar">🏃</div>
+        <h3>Trygve Ryvoll</h3>
+        <div class="contact-role">Oppmann</div>
+        <a href="mailto:trygve.ryvoll@gmail.com">trygve.ryvoll@gmail.com</a>
+      </div>
+
+    </div>
+
+    <div class="section-header reveal" style="margin-top:1rem;">
+      <span class="section-label">Finn oss</span>
+      <h2>Jøssingfjord</h2>
+      <p>Vi holder til i og rundt Jøssingfjord i Sokndal kommune, Rogaland.</p>
+    </div>
+
+    <div id="map" class="reveal"></div>
+
   </div>
 </section>
 
@@ -43,6 +86,42 @@
   <p>&copy; 2025 Jøssingfjord Jogg og Skvulp &nbsp;·&nbsp; <a href="mailto:jacobhagemann@outlook.no">jacobhagemann@outlook.no</a></p>
 </footer>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="js/main.js"></script>
+<script>
+  const map = L.map('map', { scrollWheelZoom: false }).setView([58.3825, 6.2108], 13);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    maxZoom: 18
+  }).addTo(map);
+
+  const icon = L.divIcon({
+    html: `<div style="
+      background: #0d3b6e;
+      color: white;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+      border: 2px solid #6ecfb2;
+    "><span style="transform:rotate(45deg)">🏃</span></div>`,
+    className: '',
+    iconSize: [36, 36],
+    iconAnchor: [18, 36],
+    popupAnchor: [0, -36]
+  });
+
+  L.marker([58.3825, 6.2108], { icon })
+    .addTo(map)
+    .bindPopup('<strong>Jøssingfjord Jogg og Skvulp</strong><br>Sokndal, Rogaland')
+    .openPopup();
+
+  // Enable scroll wheel zoom on click
+  map.on('click', () => map.scrollWheelZoom.enable());
+  map.on('mouseout', () => map.scrollWheelZoom.disable());
+</script>
 </body>
 </html>
