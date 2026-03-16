@@ -20,6 +20,11 @@ document.querySelectorAll('.nav-links a').forEach(link => {
   }
 });
 
+// Show logos only after fonts are loaded
+document.fonts.ready.then(() => {
+  document.querySelectorAll('.logo-svg').forEach(el => el.style.opacity = '1');
+});
+
 // Scroll reveal animation
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {

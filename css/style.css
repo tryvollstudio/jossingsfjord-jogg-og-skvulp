@@ -1,5 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Cormorant+Garamond:wght@500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Great+Vibes&display=swap');
+@font-face {
+  font-family: 'Great Vibes';
+  src: url('../fonts/GreatVibes.woff2') format('woff2');
+  font-weight: 400;
+  font-display: block;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('../fonts/CormorantGaramond.woff2') format('woff2');
+  font-weight: 500;
+  font-display: block;
+}
 
 :root {
   --primary: #1e3d2f;
